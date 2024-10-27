@@ -37,17 +37,6 @@ function displayForecast(data) {
 }
 
 
-function displayWeather(data) {
-    const iconUrl = getWeatherIcon(data.weather[0].description);
-    const weather = `
-        <h2>Aktuální počasí ve městě: ${data.name}</h2>
-        <img src="${iconUrl}" alt="${data.weather[0].description}" width="80" style="display: block; margin: 0 auto;">
-        <p>Teplota: ${data.main.temp} °C</p>
-        <p>Aktuální situace: ${data.weather[0].description}</p>
-        <p>Vlhkost: ${data.main.humidity}%</p>
-    `;
-    document.getElementById('currentWeatherResult').innerHTML = weather;
-}
 
 function getWeather() {
     const city = document.getElementById('cityInput').value;
@@ -93,3 +82,39 @@ function getWeatherIcon(description) {
     }
 }
 
+function displayWeather(data) {
+    document.getElementById('weatherResult').style.display = 'block'; // Zobrazí div pro aktuální počasí
+    const iconUrl = getWeatherIcon(data.weather[0].description);
+
+    const sunrise = new Date(data.sys.sunrise * 1000).toLocaleTimeString(); // Převod na čitelný čas
+    const sunset = new Date(data.sys.sunset * 1000).toLocaleTimeString(); // Převod na čitelný čas
+
+    const weather = `
+        <h2>Aktuální počasí ve městě: ${data.name}</h2>
+        <img src="${iconUrl}" alt="${data.weather[0].description}" width="50">
+        <p>Teplota: <b>${data.main.temp} °C</b></p>
+        <p>Aktuální situace: ${data.weather[0].description}</p>
+        <p>Vlhkost: ${data.main.humidity}%</p><br>
+        <p>Východ slunce: ${sunrise}</p>
+        <p>Západ slunce: ${sunset}</p>
+    `;
+    document.getElementById('currentWeatherResult').innerHTML = weather;
+}
+
+function getAirQuality(city) {
+    const apiKey = '7ead51f4d43b3ee0ac451738a3ea079d';
+
+    // Nejdříve získáme souřadnice města
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`)
+        .then(response => response.json())
+        .then(data => {
+            const lat = data.coord.lat;
+            const lon = data.coord.lon;
+            return fetch(`https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`);
+        })
+        .then(response => response.json())
+        .then(data => {
+            displayAirQuality(data);
+        })
+        .catch(error => console.error('Error fetching air quality:', error));
+}
