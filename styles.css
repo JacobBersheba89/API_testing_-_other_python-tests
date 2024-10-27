@@ -80,19 +80,20 @@ button:hover {
     align-items: flex-start;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    width: 20%; /* Přizpůsob podle preferencí */
+    width: 30%; /* Přizpůsob podle preferencí */
 }
 
 
  #forecastWeatherResult {
-    margin: 20px auto;
-    padding: 15px;
+    display: flex;
+    margin: 0px auto;
+    padding: 20px;
     background-color: transparent;
     justify-content: center;
     align-items: flex-start;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    width: 20%; /* Přizpůsob podle preferencí */
+    box-shadow: 0 2px 4px rgba(59, 57, 57, 0.1);
+    width: 50%; /* Přizpůsob podle preferencí */
 }
 
 
