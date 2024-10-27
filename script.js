@@ -22,11 +22,12 @@ function displayForecast(data) {
     data.list.forEach((item, index) => {
         if (index % 8 === 0) { // Každý den má 8 intervalů po 3 hodinách
             const iconUrl = getWeatherIcon(item.weather[0].description);
+            const tempRounded = Math.round(item.main.temp);
             forecastHtml += `
                 <div class="dayForecast">
                     <h3>${new Date(item.dt * 1000).toLocaleDateString()}</h3>
                     <img src="${iconUrl}" alt="${item.weather[0].description}" width="50">
-                    <p>Teplota: ${item.main.temp} °C</p>
+                    <p>Teplota:<b> ${tempRounded} °C </b></p>
                     <p>Popis: ${item.weather[0].description}</p>
                     <p>Vlhkost: ${item.main.humidity}%</p>
                 </div>
@@ -66,14 +67,19 @@ function getWeatherIcon(description) {
             return 'images/sunny.png';
         case 'zataženo':
             return 'images/cloudy.png';
+        case 'polojasno':
+        case 'skorojasno':
+            return 'images/1partly_cloudy.png';
         case 'oblačno':
-            return 'images/partly_cloudy.png';
+            return 'images/2partly_cloudy.png';
         case 'déšť':
+        case 'slabý déšť':
         case 'mrholení':
             return 'images/rainy.png';
         case 'bouřka':
             return 'images/storm.png';
         case 'sníh':
+        case 'slabé sněžení':
             return 'images/snow.png';
         case 'mlha':
             return 'images/fog.png';
