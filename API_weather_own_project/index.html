@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Počasí aktuálně</title>
+</head>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+<body>
+    <h1>Počasí aktuálně</h1>
+    <div class="input-wrapper">
+        <input type="text" id="cityInput" placeholder="Zadejte město">
+        <br><br>
+        <button onclick="getWeather()">Získat aktuální počasí</button>
+        <button onclick="getForecast(cityInput.value)">Získat 5-denní předpověď</button>
+    </div>
+    
+    <div id="currentWeatherResult"></div>
+    <div id="forecastWeatherResult"></div><br>
+    
+    <div id="forecastHeader" class="forecast-header" style="display: none;">
+    </div>
+    <div id="forecastWeatherResult" style="display: none;"></div>
+
+    <script src="script.js"></script>
+    <script src="airQuality.js"></script>
+    <link rel="stylesheet" href="styles.css">
+
+    <video autoplay muted loop id="myVideo">
+        <source src="59291-492700392_medium.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+      </video>
+
+      
+      <div id="weatherResult" style="display: none;">
+    </div><br>
+    
+    <div id="forecastWeatherResult" style="display: none;">
+        <button class="close-btn" onclick="closeWindow('forecastWeatherResult')">×××</button>
+        <!-- Zde se zobrazí předpověď na 5 dní -->
+    </div>
+
+      
+</body>
+</html>
